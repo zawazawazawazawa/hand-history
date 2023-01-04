@@ -1,10 +1,27 @@
 import * as React from 'react';
 import Link from 'next/link';
+import { HistoryContext } from '../_app'
 
 const Blind = () => {
-    const [smallBlind, setSmallBlind] = React.useState(0)
-    const [bigBlind, setBigBlind] = React.useState(0)
-    const [participates, setParticipates] = React.useState(0)
+    const historyContext = React.useContext(HistoryContext)
+    const history = historyContext.history
+    const setHistory = historyContext.setHistory
+    
+    console.log(historyContext)
+    
+    const [smallBlind, setSmallBlind] = React.useState(history.smallBlind)
+    const [bigBlind, setBigBlind] = React.useState(history.bigBlind)
+    const [participates, setParticipates] = React.useState(history.participates)
+    
+    const handleClickNext = () => {
+        setHistory({
+                    ...historyContext.history,
+                    smallBlind: smallBlind,
+                    bigBlind: bigBlind,
+                    participates: participates
+                }
+            )
+        }
     
     return (
         <>
@@ -39,7 +56,12 @@ const Blind = () => {
                 <Link href="/">最初に戻る</Link>
             </p>
             <p>
-                <Link href="/record/preflop" participates={participates}>次へ</Link>
+                <Link
+                    href="/record/preflop"
+                    onClick={() => handleClickNext()}
+                >
+                    次へ
+                </Link>
             </p>
         </>   
     )

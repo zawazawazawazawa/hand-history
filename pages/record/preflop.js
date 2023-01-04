@@ -1,7 +1,14 @@
 import * as React from 'react';
 import Link from 'next/link';
+import { HistoryContext } from '../_app'
 
-const PreFlop = (props) => {
+const PreFlop = () => {
+    const historyContext = React.useContext(HistoryContext)
+    const history = historyContext.history
+    const setHistory = historyContext.setHistory
+    
+    console.log(historyContext)
+    
     const additional_positions = [
             'BTN',
             'CO',
@@ -34,7 +41,7 @@ const PreFlop = (props) => {
         <>
             <h1>プリフロップ</h1>
             <ul>
-                {exist_positions(10).map(p => {
+                {exist_positions(history.participates).map(p => {
                     return (
                         <>
                         <li>{p}</li>
@@ -47,6 +54,21 @@ const PreFlop = (props) => {
                     )
                 })}
             </ul>
+            
+            <p>
+                <Link href="/">最初に戻る</Link>
+            </p>
+            <p>
+                <Link href="/record/blind">一つ前に戻る</Link>
+            </p>
+            <p>
+                <Link
+                    href="/"
+                    onClick={() => handleClickNext()}
+                >
+                    次へ
+                </Link>
+            </p>
         </>
     )
 }
