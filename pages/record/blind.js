@@ -52,9 +52,7 @@ const Blind = () => {
                     }
                 />
             </form>
-            <p>
-                <Link href="/">最初に戻る</Link>
-            </p>
+
             <p>
                 <Link
                     href="/record/preflop"
@@ -62,6 +60,10 @@ const Blind = () => {
                 >
                     次へ
                 </Link>
+            </p>
+            
+            <p>
+                <Link href="/">最初に戻る</Link>
             </p>
         </>   
     )
